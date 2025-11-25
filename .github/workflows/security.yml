@@ -108,7 +108,7 @@ jobs:
     steps:
       - uses: actions/download-artifact@v4
         with:
-        name: docker-image
+          name: docker-image
 
       - name: Load image
         run: docker load < image.tar
@@ -137,7 +137,7 @@ jobs:
         run: |
           cat > security-report.json <<EOF
           {
-            "timestamp": "$(date -u +"%Y-%m-%dT%H:%M:%SZ")",
+            "timestamp": "$(date -u +\"%Y-%m-%dT%H:%M:%SZ")",
             "repository": "${{ github.repository }}",
             "commit": "${{ github.sha }}",
             "branch": "${{ github.ref_name }}",
