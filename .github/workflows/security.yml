@@ -137,7 +137,7 @@ jobs:
         run: |
           cat > security-report.json <<EOF
           {
-            "timestamp": "$(date -u +\"%Y-%m-%dT%H:%M:%SZ")",
+            "timestamp": "$(date -u '+%Y-%m-%dT%H:%M:%SZ')",
             "repository": '${{ github.repository }}',
             "commit": '${{ github.sha }}',
             "branch": '${{ github.ref_name }}',
@@ -159,13 +159,15 @@ jobs:
                 "status": '${{ needs.container-scan.result }}',
                 "tool": "Trivy"
               }
+
              },
-             "summary": {
-               "total_checks": 4,
-               "passed": $(echo '${{ needs.sast.result }} ${{ needs.sca.result }} ${{ needs.secrets.result }} ${{ needs.containe
-               "failed": $(echo '${{ needs.sast.result }} ${{ needs.sca.result }} ${{ needs.secrets.result }} ${{ needs.containe
-               "overall_status": "$([[ "${{ needs.sast.result }}" == "failure" ]] || [[ "${{ needs.sca.result }}" == "failure" ]
-             }
+              "summary": {
+                "total_checks": 4,
+                "passed": $(echo '${{ needs.sast.result }} ${{ needs.sca.result }} ${{ needs.secrets.result }} ${{ needs.container-scan.result }}' | grep -c "success"),
+                "failed": $(echo '${{ needs.sast.result }} ${{ needs.sca.result }} ${{ needs.secrets.result }} ${{ needs.container-scan.result }}' | grep -c "failure"),
+                "overall_status": "$([[ '${{ needs.sast.result }}' == 'failure' ]] || [[ '${{ needs.sca.result }}' == 'failure' ]] || [[ '${{ needs.secrets.result }}' == 'failure' ]] || [[ '${{ needs.container-scan.result }}' == 'failure' ]] && echo 'failure' || echo 'success')"
+              }
+
            }
             EOF
 
