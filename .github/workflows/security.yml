@@ -199,6 +199,6 @@ jobs:
                 echo "" >> $GITHUB_STEP_SUMMARY
                 echo " Please review the failed jobs above" >> $GITHUB_STEP_SUMMARY
                 exit 1
-    else
-      echo " All security checks passed" >> $GITHUB_STEP_SUMMARY
-    fi
+               else
+                  echo " All security checks passed" >> $GITHUB_STEP_SUMMARY
+               fi
