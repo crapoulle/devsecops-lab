@@ -138,25 +138,25 @@ jobs:
           cat > security-report.json <<EOF
           {
             "timestamp": "$(date -u +\"%Y-%m-%dT%H:%M:%SZ")",
-            "repository": "${{ github.repository }}",
-            "commit": "${{ github.sha }}",
-            "branch": "${{ github.ref_name }}",
-            "workflow_run": "${{ github.run_id }}",
+            "repository": '${{ github.repository }}',
+            "commit": '${{ github.sha }}',
+            "branch": '${{ github.ref_name }}',
+            "workflow_run": '${{ github.run_id }}',
             "results": {
               "sast": {
-                "status": "${{ needs.sast.result }}",
+                "status": '${{ needs.sast.result }}',
                 "tool": "Semgrep"
               },
               "sca": {
-                "status": "${{ needs.sca.result }}",
+                "status": '${{ needs.sca.result }}',
                 "tool": "npm audit"
               },
               "secrets": {
-                "status": "${{ needs.secrets.result }}",
+                "status": '${{ needs.secrets.result }}',
                 "tool": "Gitleaks"
               },
               "container_scan": {
-                "status": "${{ needs.container-scan.result }}",
+                "status": '${{ needs.container-scan.result }}',
                 "tool": "Trivy"
               }
              },
